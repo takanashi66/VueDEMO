@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="common/css/style.css">
+	<script src="https://unpkg.com/vue"></script>
+	<title>ToDo</title>
+</head>
+<body>
+	
+	<!-- この中で実行 -->
+	<div id="app">
+		<h1>ToDoリスト</h1>
+		<!-- サブミットされたらaddメソッドを実行 -->
+		<form v-on:submit.prevent="add()">
+			<!-- ここに入力された値が取得される -->
+			<input type="text" v-model="input" placeholder="タスクを入力">
+			<input type="submit" value="登録">
+		</form>
+		
+		<h2>タスク</h2>
+		<ul>
+			<!-- dataのtodo配列を出力 -->
+			<li v-for="todo in todos">
+				<label><input type="checkbox" name="" id="">{{ todo.text }}</label>
+				<!-- クリックされたらremoveメソッドを実行(自身の値を引数にもつ) -->
+				<button v-on:click="remove(todo)">×</button>
+			</li>
+		</ul>
+		
+	</div>
+		
+	</div>
+	
+	
+	
+	<script>
+		//Vueのインスタンスを生成
+		let todo = new Vue({
+			//ターゲットを宣言
+		  el: '#app',
+		  
+		  //格納データ
+		  data: {
+		    input: '',
+				todos: [],
+		  },
+		  
+		  methods: {
+			  //追加メソッド
+			  add: function(){
+				  //inputのvalを取得(空白の除去)
+					var text = this.input.trim();
+					
+					if (text) {
+						//inputの値が取得できたら、pushしてデータを追加
+						//push() 配列の末尾に値を追加
+						this.todos.push({ text: text })
+						//inputを初期化
+						this.input = ''
+					}
+					
+				},
+				
+				//削除メソッド
+				remove: function (stat) {
+					//配列から検索して削除
+					this.todos.splice(this.todos.indexOf(stat), 1);
+				}
+			}
+		})
+	</script>
+	
+</body>
+</html>
