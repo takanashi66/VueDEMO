@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="common/css/style.css">
+	<script src="https://unpkg.com/vue"></script>
+	<title>ToDo</title>
+</head>
+<body>
+	
+	<!-- この中で実行 -->
+	<div id="app2">
+		<label for="text">入力</label>
+	  <input type="text" id="text" v-model="message">
+	  <p>{{ message }}</p>
+	</div>
+	
+	
+	
+	<script>
+		//Vueのインスタンスを生成
+		new Vue({
+		  el: '#app2',
+		  data: {
+		    message: ''
+		  }
+		})
+	</script>
+	
+</body>
+</html>

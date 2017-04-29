@@ -25,8 +25,11 @@
 		<h2>タスク</h2>
 		<ul>
 			<!-- dataのtodo配列を出力 -->
-			<li v-for="todo in todos">
-				<label><input type="checkbox" name="" id="">{{ todo.text }}</label>
+			<li v-for="(todo, index) in todos">
+				
+				<label v-if="!todos[index].e"><input type="checkbox" name="" id="">{{ todo.text }}</label>
+				<div class="edit" v-else><input type="text" v-model="inputText"><button v-on:click="readd(index)">再登録</button></div>
+				<button v-on:click="edit(index)">e</button>
 				<!-- クリックされたらremoveメソッドを実行(自身の値を引数にもつ) -->
 				<button v-on:click="remove(todo)">×</button>
 			</li>
@@ -47,6 +50,7 @@
 		  //格納データ
 		  data: {
 		    input: '',
+		    inputText: '',
 				todos: [],
 		  },
 		  
@@ -59,10 +63,24 @@
 					if (text) {
 						//inputの値が取得できたら、pushしてデータを追加
 						//push() 配列の末尾に値を追加
-						this.todos.push({ text: text })
+						this.todos.push({ text: text, e: false })
 						//inputを初期化
-						this.input = ''
+						this.input = '';
 					}
+					
+				},
+				
+				edit: function(index){
+					
+					this.todos[index].e = true;
+					this.inputText = this.todos[index].text;
+					
+				},
+				
+				readd: function(index){
+					
+					this.todos[index].text = this.inputText;
+					this.todos[index].e = false;
 					
 				},
 				
